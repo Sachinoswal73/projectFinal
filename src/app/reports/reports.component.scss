@@ -1,0 +1,20 @@
+.piechart {
+    margin-top: 30px;
+    display: block;
+    margin: 0 auto;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    // background-image: conic-gradient(
+    //     pink 0 70deg,    // cost
+    //     lightblue 0,     // profit
+    //     // orange 0 55deg
+    //     );
+}
+
+body,
+.piechart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

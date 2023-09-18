@@ -1,0 +1,94 @@
+<br>
+<div class="card-body">
+    <h5 class="card-title">Inventory Showcase</h5>
+    <br>
+      <!-- <span>Search </span> -->
+      <!-- <label for="exampleDataList" class="form-label">Datalist example</label> -->
+     
+      <div class="row">
+          <div class="col-md-6">
+            <input class="form-control" list="datalistOptions" id="exampleDataList" [(ngModel)]="nameString" placeholder="Type to search...">
+            <datalist id="datalistOptions" >
+              <option *ngFor="let pa of productsArray" [value]="pa.pname">
+            </datalist>
+          </div>
+          <div class="col-md-6">
+            <input type="range" class="form-range" min="0" [max]="maxPrice" [(ngModel)]="currentPrice" id="customRange2" style="width: 100%;">
+            <span style="font-size: 8px;">{{ currentPrice }}</span>
+          </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-12">
+            Colors :
+            <ng-container *ngFor="let alc of allColors">  
+              <span class="badge badge-primary" value="alc" (click)="clrSelected(alc)" > {{ alc }} </span> &nbsp;
+            </ng-container>
+        </div>
+      </div>
+
+     <!-- <div class="form-group">
+      <input type="text" [(ngModel)]="nameString" class="form-group-control" placeholder="Search ...">
+     </div> -->
+    <br>
+
+    <table class="table table-bordered">
+     
+      <thead>
+        <tr>
+          <th>Pid</th>
+          <th>Photo</th>
+          <th>Name</th>
+          <th>Catg</th>
+          <th>Stock</th>
+          <th>Cost</th>
+          <th>Price</th>
+          <th>Colors</th>
+          <th>Oprt</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pa of productsArray | search:nameString | color:clrString | range:currentPrice ; trackBy:trackByFunc">
+          <td>
+            {{ pa.pid }}
+          </td>
+          <td>
+            <img [src]="pa.pimg" class="card-img-top border border-light" style="width: 40px;">
+          </td>
+          <td>
+            {{ pa.pname }}
+          </td>
+          <td> 
+            {{ pa.pcat }}
+          </td>
+          <td> 
+            {{ pa.pstock }}
+          </td>
+          <td>
+            {{ pa.pcost.toLocaleString('en-IN') | currency:"INR":"symbol" }} 
+          </td>
+          <td>
+            {{ pa.pprice | currency:"INR":"symbol" }}
+          </td>
+          <td>
+            <span *ngFor="let cl of pa.pclr; let i = index">{{ cl.clr }}  <span *ngIf="i !== pa.pclr.length - 1"> | </span> </span> 
+          </td>
+          <td>
+            <button class="btn btn-secondary btn-sm mx-2"
+              (click)="editProduct(pa.pid)"
+              >
+                Edit
+            </button> 
+            <button class="btn btn-danger btn-sm"   *ngIf="qpDepm == 'superadmin'"
+            (click)="onDelete(pa.pid)"
+            >
+                Delete
+          </button>
+          </td>
+        </tr>
+      </tbody>
+     
+    </table>
+
+    
+  </div>

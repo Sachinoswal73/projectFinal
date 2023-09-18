@@ -1,0 +1,41 @@
+<h1>timer works</h1>
+
+<br>
+
+<hr>
+<!-- 
+// until the status of all the files is not completed
+// progress bar updates
+// subscription in a function & to be called wherever it's needed
+// run only on initialization & add Emitter
+// customized observable with complete, next handling methods to ease & resuse the code -->
+
+<br>
+
+<app-add-empl></app-add-empl>
+
+<br>
+
+<table class="table table-bordered">
+    <tr>
+        <td>username</td>
+        <td>department</td>
+        <td>status</td>
+    </tr>
+    <tr *ngFor="let ed of emplArray">
+        <td>{{ ed.username }}</td>
+        <td>{{ ed.department }}</td>
+        <td>
+            <div class="progress" *ngIf="ed.department=='superadmin'">
+                <div class="progress-bar" role="progressbar" style="width: 40%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">40%</div>
+            </div>
+            <div class="progress" *ngIf="ed.department=='admin'">
+                <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<br>
+
+form-control

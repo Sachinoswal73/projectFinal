@@ -1,0 +1,43 @@
+<br>
+
+
+<div class="row">
+
+    <p class="float-right">
+      * Employee id : {{ prm }}
+       |
+        Department : {{ qprm }} .
+    </p>
+    
+<div class="col-12 card text-center">
+    <div class="card-header">
+      <ul class="nav nav-tabs card-header-tabs">
+        <li class="nav-item">
+          <a class="nav-link" 
+            routerLink="./"
+            [queryParams]="{dept : qprm}"
+            >Inventory</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="addProducts"
+            [queryParams]="{dept : qprm}"
+            >Add Products</a>
+        </li>
+        <li class="nav-item" *ngIf="qprm == 'superadmin'">
+          <a class="nav-link" 
+            routerLink="reports"
+            [queryParams]="{dept : qprm}"
+            >Reports</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" style="cursor: pointer;" (click)="onLogout()">Logout</a>
+          </li>
+      </ul>
+    </div>
+
+    <router-outlet></router-outlet>
+        
+  </div>
+
+
+</div>

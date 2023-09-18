@@ -1,0 +1,102 @@
+<br>
+<div class="card-body">
+    <h5 class="card-title">Add Products</h5>
+    
+    <br>
+    
+    <form [formGroup]="addProductForm" (ngSubmit)="onAddProduct()">
+
+        <div class="form-row">
+
+          <div class="form-group col-md-6">
+            <input type="text" class="form-control" id="" placeholder="Product name *" formControlName="pname">
+            <span class="badge badge-warning" *ngIf="addProductForm.get('pname').invalid && addProductForm.get('pname').touched">* Required</span>
+          </div>
+
+          <div class="form-group col-md-6">
+            <input type="text" class="form-control" id="" placeholder="Image path url" formControlName="pimg">
+          </div>
+
+        </div>
+
+        <div class="form-row">
+
+          <div class="form-group col-md-4">
+            <input type="text" class="form-control" id="" placeholder="Product Cost" formControlName="pcost"
+            #pcost
+            (input)="onPCost()"
+            >
+          </div>
+
+          <div class="form-group col-md-2">
+            <input type="number" class="form-control" id="" placeholder="+ Profit in %"
+            min="0"
+            formControlName="pprofit"
+            #pprofit
+            (input)="calProfit( +pcost.value, +pprofit.value, +pdisc.value)"
+            >
+            <span style="font-size: 10px;" class="text-primary" *ngIf="addProductForm.get('pprofit').dirty"> Profit Amt - {{ profitAmt }} </span>
+            <span style="font-size: 10px;" class="text-primary" *ngIf="addProductForm.get('pprofit').invalid"> * Must fill </span>
+          </div>
+
+          <div class="form-group col-md-2">
+            <input type="number" class="form-control" id="" placeholder="- Disc in %"
+            min="0" max="100" 
+            formControlName="pdisc"
+            #pdisc
+            (input)="calProfit( +pcost.value, +pprofit.value, +pdisc.value)"
+            >
+            <span style="font-size: 10px;" class="text-warning" *ngIf="addProductForm.get('pdisc').dirty"> Discount Amt - {{ discAmt }} </span>
+          </div>
+
+          <div class="form-group col-md-4">
+            <input type="text" class="form-control" id="" placeholder="Final Price" formControlName="pprice"
+            [ngModel]="finalPrice"
+            >
+            <span style="font-size: 10px;" class="text-secondary" *ngIf="addProductForm.get('pdisc').dirty && addProductForm.get('pprofit')"> Ultim Profit - {{ finalPrice - +pcost.value }} </span>
+          </div>
+
+        </div>
+
+       
+        <div class="form-row">
+         
+          <div class="form-group col-md-3">
+            <input type="number" class="form-control" id="" placeholder="Stock ( Min Qty 1 )" min="1" 
+            value="1"
+            formControlName="pstock">
+            <span style="font-size: 10px;" class="text-warning" *ngIf="addProductForm.get('pstock').errors?.invalidStock && addProductForm.get('pstock').touched"> Stock Qty should be minimum 1. </span>
+          </div>
+
+          <div class="form-group col-md-4">
+            <select id="" class="form-control" formControlName="pcat">
+              <option value='' selected>Product category</option>
+                <option value="gold">Gold</option>
+                <option value="silver">Silver</option>
+                <option value="gems">Gems</option>
+            </select>
+          </div>
+
+          <div class="form-group col-md-4">
+            <div formArrayName="pclr" class="input-group mb-3" *ngFor="let cl of pclrArray.controls; let i = index">
+                &nbsp;
+                <ng-container [formGroupName]="i">
+                  <input type="text" class="form-control" placeholder="color" aria-label="" formControlName="clr">
+                  <span class="input-group-text" *ngIf="i === addProductForm.get('pclr').controls.length - 1" (click)="addColor()">+</span>
+                </ng-container>         
+            </div>
+          </div>
+        </div>
+       
+        <button type="submit" class="btn btn-primary btn-sm"
+        [disabled]="addProductForm.invalid"
+        >Add Product</button>
+      </form>
+
+      <hr>
+      
+      <!-- <div class="piechart"></div> -->
+
+
+</div>
+

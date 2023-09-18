@@ -1,0 +1,66 @@
+<div class="row">
+    <div class="col-6 m-auto border border-primary rounded-right">
+
+        <h3 class="text-center mt-2">Signupp</h3>
+
+        <hr>
+
+        <form class="mb-4" [formGroup]="empSignuppForm" (ngSubmit)="onSignupp()">
+        
+        <div class="form-group">
+            <input type="text" 
+            class="form-control" 
+            id="exampleInputEmail1" placeholder="Username"
+            formControlName="username"
+            >
+            <small *ngIf=" empSignuppForm.get('username').touched && empSignuppForm.get('username').invalid" id="" class="form-text text-muted">* required.</small>
+        </div>
+        
+        <div class="form-group ">
+        <select 
+            name="department" 
+            id=""
+            class="form-control"
+            formControlName="department"
+            >
+            <option>
+                Select Your Role
+            </option>
+            <option
+                value="superadmin"
+                >
+                SuperAdmin
+            </option>
+            <option 
+                value="admin"
+                >
+                Admin
+            </option>
+            <option 
+                value="salesman"
+                >
+                Salesman
+            </option>
+        </select>
+        <small *ngIf=" empSignuppForm.get('department').touched && empSignuppForm.get('department').invalid" id="" class="form-text text-muted">* required.</small>
+        </div>
+
+        <div class="form-group">
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
+            formControlName="password">
+            <small *ngIf=" empSignuppForm.get('password').touched && empSignuppForm.get('password').invalid" id="" class="form-text text-muted">* required.</small>
+        </div>
+        
+        <button type="submit" class="btn btn-info"
+        [disabled]="empSignuppForm.invalid"
+        >Signupp</button>
+
+        <small id="clkRoutr" class="form-text text-danger"
+            (click)="navig()"
+            >
+            Already a User? Signin
+        </small>
+
+    </form>
+    </div>
+</div>

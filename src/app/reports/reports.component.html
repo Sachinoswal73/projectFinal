@@ -1,0 +1,25 @@
+<br>
+<div class="card-body">
+    <h5 class="card-title">Reports</h5>
+    <hr>
+    <div class="row">
+        <div class="col-md-4">
+            <h6>
+                Total Cost / Profit
+            </h6>
+            <br>
+            <!-- <input type="range" class="form-range" min="0" [max]="maxPrc" [(ngModel)]="currentPrice" id="customRange2" style="width: 100%;">
+            <span style="font-size: 8px;">{{ currentPrice }} - {{ maxPrc }}</span>
+            <br><br> -->
+            <div class="piechart" appPiechart [propr]="profitConic" ></div>  
+            <br>
+            <div style="font-size: 10px;">
+                Cost - {{ totalInventoryCost | currency:"INR":"symbol" }}
+                | 
+                Profit ({{ profitPerc }}%)
+                 - {{ totalInventoryPrice - totalInventoryCost | currency:"INR":"symbol" }} </div>  
+            <hr>
+                      
+        </div>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+<form class="form-group" [formGroup]="ToDoListForm">
+    <div formArrayName="items">
+      <table class="table-bordered" *ngIf="itemsArray.value.length">
+        <tr>
+          <th>ItemName</th>
+          <th>Completed</th>
+          <th>Priority</th>
+          <th>Action</th>
+        </tr>
+        <tr
+          *ngFor="let x of itemsArray.controls; let i = index; "
+          [formGroupName]="i"
+        >
+          <td>
+            <input
+              class="form-control"
+              formControlName="title"
+              placeholder="Item name"
+            />
+          </td>
+          <td>
+            <input
+              class="form-control"
+              type="checkbox"
+              formControlName="completed"
+            />
+          </td>
+          <td>
+            <select class="form-control" formControlName="priority">
+              <option disabled selected hidden value="null">
+                Select Priority
+              </option>
+              <option *ngFor="let m of prio" [value]="m">{{ m }}</option>
+            </select>
+          </td>
+          <td>
+            <button (click)="deleteItem(i)">Delete Item</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <button (click)="addNewItem()">Add New Item</button>
+    <button (click)="deleteAll()">Delete All</button>
+  </form>
+  
+  <b>Form's Value:</b>
+  {{ ToDoListForm.value | json }}
+  <br />
+  
+  <b>Form is Valid ? :</b>
+  {{ ToDoListForm.valid }}
